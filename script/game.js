@@ -354,8 +354,8 @@ const ENDINGS = [
   { id: "easy_bad_health", title: "早すぎるおむかえ", desc: "グローグーの元気がなくなり、マンドーが現れた。" },
   { id: "easy_time", title: "あと少しの距離", desc: "夕方になったが、グローグーとはまだ距離があった。" },
   { id: "hard_bad_snack", title: "甘い痕跡", desc: "おやつの騒ぎで潜伏先がバレてしまった。" },
-  { id: "hard_bad_health", title: "フォースの導き", desc: "弱ったグローグーの気配をマンドーが感じ取った。" },
-  { id: "hard_bad_hideout", title: "帰る場所", desc: "潜伏先の選択をミスし、マンドーに場所がバレた。" },
+  { id: "hard_bad_health", title: "フォースの導き", desc: "弱ったグローグーの気配をルークが感じ取った。" },
+  { id: "hard_bad_hideout", title: "潜伏失敗", desc: "潜伏先の選択をミスし、マンドーに場所がバレた。" },
   { id: "hard_time", title: "グローグーの紹介", desc: "すっかり懐いたグローグーが、マンドーを紹介してくれた。" },
   { id: "hard_grogu_return", title: "自分で帰る子", desc: "朝起きるとグローグーはいなくなっていた。レイザークレストの近くではしゃいでいた。" },
   { id: "hard_rotta", title: "ロッタのおむかえ", desc: "ロッタが上から転がってきた。あなたは踏み潰された。" },
@@ -415,44 +415,44 @@ function endGame(type) {
         img: "welcome"
       },
       snackPickup: {
-        title: "おやつルート：マンドーのおむかえ",
+        title: "おやつルート",
         msg: "マンドーが予定より早く戻ってきた。\n\n「おかしの食べ過ぎだ。夕飯が入らないだろう」\n\nそう言いながら、グローグーを抱き上げる。\n\nグローグーは少しだけこちらを振り返り、名残惜しそうに手を振った。",
         img: "snackEnd"
       },
       badHealth: {
-        title: "マンドーのおむかえ",
+        title: "早すぎるおむかえ",
         msg: "グローグーのげんきがなくなってしまった。\n心配したマンドーが早めにお迎えにきた。",
         img: "senseEnd"
       },
       time: {
-        title: "夕方のおむかえ",
+        title: "あと少しの距離",
         msg: "夕方になり、マンドーが迎えにきた。\n\nもう少しで仲良しになれたのに…",
         img: "easyBad"
       }
     },
     hard: {
       groguReturn: {
-        title: "バッドエンド：自分で帰る子",
+        title: "自分で帰る子",
         msg: "朝起きるとグローグーはいなくなっていた。\n慌てて外に出るとレイザークレストの近くではしゃぐグローグーが見えた。",
         img: "hard_bad"  // 専用絵ができたら差し替え
       },
       badSnack: {
-        title: "バッドエンド：マンドーのおむかえ",
+        title: "甘い痕跡",
         msg: "売店で未購入のお菓子を食べてしまい騒ぎになった。\nマンドーに居場所がバレてしまった。",
         img: "okashiBad"
       },
       badHealth: {
-        title: "バッドエンド：マンドーのおむかえ",
-        msg: "グローグーが弱ってしまい、マンドーが感知してやってきた。\nすべてが終わった。",
+        title: "フォースの導き",
+        msg: "グローグーが弱ってしまい、ルークが感知してやってきた。\nすべてが終わった。",
         img: "senseEnd"
       },
       badHideout: {
-        title: "バッドエンド：マンドーのおむかえ",
+        title: "潜伏失敗",
         msg: "潜伏先の選択をミスした。\nマンドーに場所がバレてしまった。",
         img: "bad"
       },
       time: {
-        title: "バッドエンド：グローグーの紹介",
+        title: "グローグーの紹介",
         msg: "すっかり懐いたグローグーが、マンドーを紹介してくれた。",
         img: "hardtime"
       }
@@ -461,7 +461,7 @@ function endGame(type) {
 
   const endingIds = {
     easy: { good: "easy_good", snackPickup: "easy_snack", badHealth: "easy_bad_health", time: "easy_time" },
-    hard: { good: "hard_good", badSnack: "hard_bad_snack", badHealth: "hard_bad_health", badHideout: "hard_bad_hideout", time: "hard_time", groguReturn: "hard_grogu_return", rotta: "hard_rotta" }
+    hard: { good: "hard_time", badSnack: "hard_bad_snack", badHealth: "hard_bad_health", badHideout: "hard_bad_hideout", time: "hard_time", groguReturn: "hard_grogu_return", rotta: "hard_rotta" }
   };
   recordEnding(endingIds[diffKey][type]);
 
@@ -486,10 +486,10 @@ function resolveFinalEnding() {
     endGame("time");
   } else if (state.bond >= 80 && state.health >= 25 && (state.tracking || 0) < 75) {
     endGame("time");        // なつき度高い→グローグーが紹介
+  } else if (state.health >= 70 && state.bond < 50 && (state.tracking || 0) < 50) {
+    endGame("groguReturn"); // ← 自分で帰る子
   } else if (state.bond < 80 && state.health >= 25 && (state.tracking || 0) < 75) {
-    endGame("groguReturn"); // なつき度低い→自分で帰る
-  } else if (state.health >= 60 && state.bond < 80 && (state.tracking || 0) < 65) {
-    showRottaEnding();
+    Math.random() < 0.5 ? showRottaEnding() : endGame("groguReturn");
   } else {
     endGame("time");
   }
