@@ -1,18 +1,25 @@
 
 const IMGS = {
   normal: "image/egao.png",
-  sleep: "image/ohirune.jpeg",
+  sleep: "image/ohirune.webp",
   feed: "image/mog.webp",
   snack: "image/oyatsu.webp",
   start: "image/2.jpeg",
-  welcome: "image/dakko.png",
+  welcome: "image/dakko.webp",
   bad: "image/dakko.png",
   hideout: "image/hideout.webp",
   // なつき度20未満
   looking: "image/looking.webp",
+  cautious: "image/cautious.webp",
+  good: "image/good.webp",
   snackEnd: "image/snack-end.webp",
   senseEnd: "image/sense-end.webp",
   hardtime: "image/hardtime.webp",
+  easyBad: "image/eazy_bad.webp",
+  watch: "image/watch.webp",
+  play: "image/play.webp",
+  okashiBad: "image/okashibad.webp",
+  hard_bad: "image/hard_bad.webp",
   force: "image/force.webp"
 };
 
@@ -51,7 +58,7 @@ const ALL_ACTIONS = {
     trace: 5,
     snack: false,
     kidnap: false,
-    logs: ["キャッキャッと走り回った⚽", "たのしくあそんだ！", "元気いっぱい！"]
+    logs: ["マンドーのフィギュアを嬉しそうに見せてくれた。", "小さな手でフィギュアをぎゅっと握っている。", "楽しそうに遊んでいる。こちらもつられて笑ってしまった。"]
   },
   sleep: {
     label: "おひるね",
@@ -74,7 +81,7 @@ const ALL_ACTIONS = {
     trace: 8,
     snack: true,
     kidnap: false,
-    style: "risky",
+    style: "safe",
     logs: ["おやつをあげた…目がキラキラ", "おいしそうに食べてくれた。", "一枚だけ…のつもりが止まらない。"]
   },
   watch: {
@@ -98,13 +105,13 @@ const ALL_ACTIONS = {
     trace: 14,
     snack: false,
     kidnap: false,
-    style: "risky",
+    style: "safe",
     logs: ["小さな手がふわりと動き、部屋のものが浮いた！", "グローグーは得意げだ。でも少し疲れたみたい。", "楽しそうだけど、力を使いすぎたかもしれない。"]
   },
   kidnap: {
     label: "こっそり連れ去る…",
     ico: "🏃",
-    hint: "※難易度変化",
+    hint: "",
     bond: 0,
     health: 0,
     snack: false,
@@ -159,7 +166,7 @@ function clamp(v, mn, mx) {
 }
 
 const MOODS = [
-  [70, "こちらを見て微笑んでいる"],
+  [70, "楽しそうにしている"],
   [45, "興味深そうに見つめている"],
   [20, "まだ少し警戒している"],
   [0, "マンドーを探しているようだ"]
@@ -214,6 +221,12 @@ function getHealthEmoji(v) {
   return "😵";
 }
 
+function getNormalImg(bond) {
+  if (bond >= 70) return "normal";    // 笑顔
+  if (bond >= 45) return "good";      // 興味深そう
+  if (bond >= 20) return "cautious";  // 警戒してる
+  return "looking";                   // マンドーを探してる
+}
 
 function traceLog(v) {
   if (v >= 75) return "気配が濃い。マンドーはすぐ近くまで来ている。";
@@ -247,7 +260,7 @@ function render() {
     setImg("looking");
   }
   else {
-    setImg("normal");
+    setImg(getNormalImg(state.bond));
   }
   document.getElementById("barBond").style.width = Math.min(s.bond, 100) + "%";
   document.getElementById("valBond").textContent = Math.round(s.bond);
@@ -337,15 +350,15 @@ const ENDING_STORAGE_KEY = "groguEndingCollection.v1";
 
 const ENDINGS = [
   { id: "easy_good", title: "夕方のおむかえ", desc: "グローグーと仲良く過ごし、マンドーに無事引き渡した。" },
-  { id: "easy_snack", title: "おやつの代償", desc: "おやつをあげすぎて、マンドーが予定より早く迎えに来た。" },
-  { id: "easy_bad_health", title: "早すぎるおむかえ", desc: "グローグーの元気がなくなり、心配したマンドーが現れた。" },
-  { id: "easy_time", title: "あと少しの距離", desc: "夕方になったが、グローグーとはまだ少し距離があった。" },
-  { id: "hard_bad_snack", title: "甘い痕跡", desc: "おやつの気配で騒ぎになり、潜伏先がバレてしまった。" },
-  { id: "hard_bad_health", title: "フォースの導き", desc: "弱ったグローグーの気配をルークが感じ取った。" },
-  { id: "hard_bad_hideout", title: "帰る場所", desc: "グローグーは自分の帰る場所へ戻った。あなたはマンドーと目が合った。" },
+  { id: "easy_snack", title: "おやつルート", desc: "おやつをあげすぎて、マンドーが予定より早く迎えに来た。" },
+  { id: "easy_bad_health", title: "早すぎるおむかえ", desc: "グローグーの元気がなくなり、マンドーが現れた。" },
+  { id: "easy_time", title: "あと少しの距離", desc: "夕方になったが、グローグーとはまだ距離があった。" },
+  { id: "hard_bad_snack", title: "甘い痕跡", desc: "おやつの騒ぎで潜伏先がバレてしまった。" },
+  { id: "hard_bad_health", title: "フォースの導き", desc: "弱ったグローグーの気配をマンドーが感じ取った。" },
+  { id: "hard_bad_hideout", title: "帰る場所", desc: "潜伏先の選択をミスし、マンドーに場所がバレた。" },
   { id: "hard_time", title: "グローグーの紹介", desc: "すっかり懐いたグローグーが、マンドーを紹介してくれた。" },
-  { id: "hard_grogu_return", title: "自分で帰る子", desc: "10ターン逃げ切ったが、グローグーは自分の意志で帰っていった。" },
-  { id: "hard_rotta", title: "ロッタのおむかえ", desc: "ロッタが上から転がってきた。あなたは踏み潰された。" }
+  { id: "hard_grogu_return", title: "自分で帰る子", desc: "朝起きるとグローグーはいなくなっていた。レイザークレストの近くではしゃいでいた。" },
+  { id: "hard_rotta", title: "ロッタのおむかえ", desc: "ロッタが上から転がってきた。あなたは踏み潰された。" },
 ];
 
 function getCollectedEndings() {
@@ -398,7 +411,7 @@ function endGame(type) {
     easy: {
       good: {
         title: "夕方のおむかえ",
-        msg: "夕方になり、マンドーが戻ってきた。\n\nグローグーはすっかりあなたに懐いている。\n\n「世話になったな」\n\nそう言うと、マンドーはグローグーを連れて帰っていった。\nグローグーは小さく手を振っている。",
+        msg: "夕方になり、マンドーが戻ってきた。\n\nグローグーはすぐに彼に駆け寄ったが、\n最後に一度だけ振り返り、手を振ってくれた。",
         img: "welcome"
       },
       snackPickup: {
@@ -413,15 +426,20 @@ function endGame(type) {
       },
       time: {
         title: "夕方のおむかえ",
-        msg: "夕方になり、マンドーが迎えにきた。\n\nもう少しで仲良しになれたのに…\nグローグーは不思議そうにこちらを見つめている。",
-        img: "welcome"
+        msg: "夕方になり、マンドーが迎えにきた。\n\nもう少しで仲良しになれたのに…",
+        img: "easyBad"
       }
     },
     hard: {
+      groguReturn: {
+        title: "バッドエンド：自分で帰る子",
+        msg: "朝起きるとグローグーはいなくなっていた。\n慌てて外に出るとレイザークレストの近くではしゃぐグローグーが見えた。",
+        img: "hard_bad"  // 専用絵ができたら差し替え
+      },
       badSnack: {
         title: "バッドエンド：マンドーのおむかえ",
-        msg: "おやつをあげすぎた。\nグローグーが大騒ぎして、マンドーに居場所がバレてしまった。",
-        img: "bad"
+        msg: "売店で未購入のお菓子を食べてしまい騒ぎになった。\nマンドーに居場所がバレてしまった。",
+        img: "okashiBad"
       },
       badHealth: {
         title: "バッドエンド：マンドーのおむかえ",
@@ -466,9 +484,10 @@ function resolveFinalEnding() {
   // hard
   if ((state.tracking || 0) >= 75) {
     endGame("time");
-  } else if (state.bond >= 105 && state.health >= 25) {
-    // hard_good と条件が近いので time に統一
-    endGame("time");
+  } else if (state.bond >= 80 && state.health >= 25 && (state.tracking || 0) < 75) {
+    endGame("time");        // なつき度高い→グローグーが紹介
+  } else if (state.bond < 80 && state.health >= 25 && (state.tracking || 0) < 75) {
+    endGame("groguReturn"); // なつき度低い→自分で帰る
   } else if (state.health >= 60 && state.bond < 80 && (state.tracking || 0) < 65) {
     showRottaEnding();
   } else {
@@ -605,7 +624,9 @@ function doAction(key) {
       key === "feed" ? "feed" :
         key === "snack" ? "snack" :
           key === "forcePlay" ? "force" :
-            "normal";
+            key === "watch" ? "watch" :
+              key === "play" ? "play" :
+                "normal";
 
   document.querySelectorAll(".action-btn").forEach(b => b.disabled = true);
 
