@@ -901,7 +901,7 @@ function startGame(key) {
 
 function startDiffSelect() {
   document.getElementById("ovImg").src = IMGS.start;
-  document.getElementById("ovTitle").textContent = "グローグーおるすばん日記";
+  document.getElementById("ovTitle").textContent = "グローグーおるすばん";
   document.getElementById("ovMsg").textContent = "マンドーが帰ってくるまで、グローグーと過ごそう。\nエンド回収率：" + endingCountText();
   document.getElementById("ovBtns").innerHTML =
     '<div class="diff-btns">' +
