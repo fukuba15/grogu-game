@@ -20,6 +20,9 @@ const IMGS = {
   play: "image/play.webp",
   okashiBad: "image/okashibad.webp",
   hard_bad: "image/hard_bad.webp",
+  bad: "image/bad.webp",
+  hard_rotta: "image/rotta_bad.webp",
+  bad_force: "image/bad_force.webp",
   force: "image/force.webp"
 };
 
@@ -381,14 +384,49 @@ function endingCountText() {
   return getCollectedEndings().length + " / " + ENDINGS.length;
 }
 
+// エンディング振り返り用の詳細データ（id → 画像キー・本文）
+const ENDING_DETAILS = {
+  easy_good: { img: "welcome", msg: "夕方になり、マンドーが戻ってきた。\n\nグローグーはすぐに彼に駆け寄ったが、\n最後に一度だけ振り返り、手を振ってくれた。" },
+  easy_snack: { img: "snackEnd", msg: "マンドーが予定より早く戻ってきた。\n\n「おかしの食べ過ぎだ。夕飯が入らないだろう」\n\nそう言いながら、グローグーを抱き上げる。\n\nグローグーは少しだけこちらを振り返り、名残惜しそうに手を振った。" },
+  easy_bad_health: { img: "senseEnd", msg: "グローグーのげんきがなくなってしまった。\n心配したマンドーが早めにお迎えにきた。" },
+  easy_time: { img: "easyBad", msg: "夕方になり、マンドーが迎えにきた。\n\nもう少しで仲良しになれたのに…" },
+  hard_bad_snack: { img: "okashiBad", msg: "売店で未購入のお菓子を食べてしまい騒ぎになった。\nマンドーに居場所がバレてしまった。" },
+  hard_bad_health: { img: "bad_force", msg: "グローグーが弱ってしまい、ルークが感知してやってきた。\nすべてが終わった。" },
+  hard_bad_hideout: { img: "bad", msg: "物陰の向こうに、誰かが立っていた。\nグローグーは小さく声をあげる。\nまるで、帰る場所を見つけたみたいに。\n「……見つけた」\nマンドーだった。" },
+  hard_time: { img: "hardtime", msg: "すっかり懐いたグローグーが、マンドーを紹介してくれた。" },
+  hard_grogu_return: { img: "hard_bad", msg: "朝起きるとグローグーはいなくなっていた。\n慌てて外に出るとレイザークレストの近くではしゃぐグローグーが見えた。" },
+  hard_rotta: { img: "hard_rotta", msg: "あなたは逃げ切った。\n……と思った瞬間。\n\nロッタが上から転がってきた。\nあなたは踏み潰された。" }
+};
+
+function showEndingReview(endingId) {
+  const e = ENDINGS.find(e => e.id === endingId);
+  const detail = ENDING_DETAILS[endingId];
+  if (!e || !detail) return;
+
+  document.getElementById("overlay").classList.remove("collection-mode");
+  document.getElementById("ovImg").src = IMGS[detail.img] || IMGS.normal;
+  document.getElementById("ovTitle").textContent = e.title;
+  document.getElementById("ovMsg").textContent = detail.msg;
+  document.getElementById("ovBtns").innerHTML =
+    '<button class="sub-btn" onclick="showEndingCollection()">← 一覧に戻る</button>';
+  document.getElementById("overlay").style.display = "flex";
+}
+
 function showEndingCollection() {
   const collected = getCollectedEndings();
   const cards = ENDINGS.map((e, idx) => {
     const found = collected.includes(e.id);
-    return '<div class="collection-card' + (found ? '' : ' locked') + '">' +
-      '<strong>' + String(idx + 1).padStart(2, '0') + '. ' + (found ? e.title : '？？？') + '</strong>' +
-      '<small>' + (found ? e.desc : 'まだ見ていないエンディングです。') + '</small>' +
-      '</div>';
+    if (found) {
+      return '<div class="collection-card collection-card--unlocked" onclick="showEndingReview(\'' + e.id + '\')" style="cursor:pointer;">' +
+        '<strong>' + String(idx + 1).padStart(2, '0') + '. ' + e.title + ' <span style="font-size:10px;color:#65cfa6;">▶ 振り返る</span></strong>' +
+        '<small>' + e.desc + '</small>' +
+        '</div>';
+    } else {
+      return '<div class="collection-card locked">' +
+        '<strong>' + String(idx + 1).padStart(2, '0') + '. ？？？</strong>' +
+        '<small>まだ見ていないエンディングです。</small>' +
+        '</div>';
+    }
   }).join('');
 
   document.getElementById("overlay").classList.add("collection-mode");
