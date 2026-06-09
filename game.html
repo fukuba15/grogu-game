@@ -3,8 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ぐろーぐーのおるすばん</title>
+  <meta http-equiv="refresh" content="0; url=./">
   <meta property="og:title" content="ぐろーぐーのおるすばん">
   <meta property="og:description" content="非公式ゲーム">
   <meta property="og:type" content="website">
@@ -17,7 +16,6 @@
   <meta name="twitter:description" content="非公式ゲーム">
   <meta name="twitter:image" content="https://fukuba15.github.io/grogu-game/image/ogp.png">
   <meta name="robots" content="noindex, nofollow">
-  <link rel="stylesheet" href="css/style.css">
   <!-- Google Tag Manager -->
   <script>(function (w, d, s, l, i) {
       w[l] = w[l] || []; w[l].push({
@@ -28,7 +26,10 @@
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-T359VGW8');</script>
   <!-- End Google Tag Manager -->
-
+  <script>
+    location.replace("./");
+  </script>
+  <title>Redirecting...</title>
 </head>
 
 <body>
@@ -36,109 +37,7 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T359VGW8" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
-  <div id="game">
-    <div class="app-title" style="display: none;">
-      <h1>🌿 グローグーおるすばん</h1>
-      <p>マンドーが帰ってくるまで、ゆっくりお世話しよう</p>
-    </div>
-
-    <div class="card">
-      <div class="hud">
-        <div class="hud-line">
-          <span id="turnDisp">1 / 10</span>
-          <span class="hud-sep">｜</span>
-          <span>体調 <span id="miniHealth">😆</span></span>
-          <span class="hud-sep">｜</span>
-          <span>なつき度 <span id="miniBond">0%</span></span>
-          <span class="hud-sep">｜</span>
-          <span id="diffDisp">やさしい</span>
-        </div>
-      </div>
-
-      <div class="grogu-area">
-        <div class="grogu-frame">
-          <img class="grogu-img" id="groguImg" src="image/egao.png" alt="グローグー">
-        </div>
-        <div class="mood-text" id="moodText">…</div>
-        <div class="log" id="logText">…</div>
-      </div>
-
-      <div id="actionCard">
-        <div id="actionPanel">
-          <div class="section-title">なにをする？</div>
-          <div class="btn-grid" id="actionGrid"></div>
-        </div>
-        <div id="continuePanel" style="display:none; text-align:center; padding: 8px 0;">
-          <button class="continue-btn" id="continueBtn">🐾 つづける</button>
-        </div>
-      </div>
-    </div>
-
-
-
-
-    <div class="card" style="display: none;">
-      <div class="section-title">グローグーのようす</div>
-      <div class="stat-row">
-        <span class="stat-label">なつき度</span>
-        <div class="bar-bg">
-          <div class="bar-fill bar-bond" id="barBond" style="width:0%"></div>
-        </div>
-        <span class="stat-val" id="valBond">0</span>
-      </div>
-      <div class="stat-row">
-        <span class="stat-label">げんき</span>
-        <div class="bar-bg">
-          <div class="bar-fill bar-health" id="barHealth" style="width:80%"></div>
-        </div>
-        <span class="stat-val" id="valHealth">80</span>
-      </div>
-      <div class="stat-row hard-only" id="traceRow">
-        <span class="stat-label">気配</span>
-        <div class="bar-bg">
-          <div class="bar-fill bar-trace" id="barTrace" style="width:0%"></div>
-        </div>
-        <span class="stat-val" id="valTrace">静</span>
-      </div>
-      <div class="snack-warn" id="snackWarn"></div>
-    </div>
-
-
-
-    <div id="overlay" class="overlay" style="display:none">
-      <div class="overlay-box">
-        <img class="ov-img" id="ovImg" src="" alt="">
-        <div class="ov-title" id="ovTitle"></div>
-        <div class="ov-msg" id="ovMsg"></div>
-        <div id="ovBtns"></div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div id="deadEndScreen" class="dead-end-screen">
-    <div class="dead-end-box">
-      <div id="deadStory" class="dead-story"></div>
-      <div id="deadTitle" class="dead-title">DEAD END</div>
-      <button id="deadResetBtn" class="dead-reset-btn" onclick="resetFromDeadEnd()">最初に戻る</button>
-    </div>
-  </div>
-
-
-  <div id="rottaScreen" class="rotta-screen">
-    <img src="image/rotta.gif" class="rotta-roll-img">
-
-    <div class="rotta-caption" id="rottaCaption"></div>
-
-    <button class="rotta-reset-btn" onclick="resetFromRotta()">
-      最初に戻る
-    </button>
-  </div>
-
-
-  <script src="script/game.js" defer></script>
-
+  <p>移動中です...</p>
 </body>
 
 </html>
