@@ -4,17 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ぐろーぐーのおるすばん</title>
-  <meta property="og:title" content="ぐろーぐーのおるすばん">
-  <meta property="og:description" content="非公式ゲーム">
+  <title>ぐろーぐーのおるすばん｜お知らせ</title>
+  <meta property="og:title" content="ぐろーぐーのおるすばん｜お知らせ">
+  <meta property="og:description" content="本サイトは公開を終了しました">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fukuba15.github.io/grogu-game/">
   <meta property="og:image" content="https://fukuba15.github.io/grogu-game/image/ogp.png">
   <meta name="twitter:site" content="@fukuba15">
   <meta name="twitter:image:alt" content="ぐろーぐーのおるすばん">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ぐろーぐーのおるすばん">
-  <meta name="twitter:description" content="非公式ゲーム">
+  <meta name="twitter:title" content="ぐろーぐーのおるすばん｜お知らせ">
+  <meta name="twitter:description" content="本サイトは公開を終了しました">
   <meta name="twitter:image" content="https://fukuba15.github.io/grogu-game/image/ogp.png">
   <meta name="robots" content="noindex, nofollow">
   <!-- Google Tag Manager -->
@@ -124,7 +124,6 @@
       gap: 16px;
     }
 
-    /* ── ロゴ ── */
     .logo-wrap {
       animation: fadeSlideDown 0.6s ease both;
     }
@@ -136,175 +135,75 @@
       filter: drop-shadow(0 6px 18px rgba(94, 122, 150, 0.2));
     }
 
-    /* ── カード共通 ── */
     .card {
       width: 100%;
       background: var(--card);
       border: 1px solid var(--card-border);
       border-radius: 26px;
-      padding: 20px 18px;
+      padding: 22px 20px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
       animation: fadeSlideUp 0.55s ease both;
     }
 
-    /* ── 注意事項 ── */
     .notice-card {
       animation-delay: 0.1s;
     }
 
     .notice-title {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 900;
       color: #425c52;
       letter-spacing: 0.08em;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .notice-list {
-      list-style: none;
+    .notice-body {
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      gap: 12px;
     }
 
-    .notice-list li {
+    .notice-body p {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.85;
+    }
+
+    .notice-body strong {
+      color: var(--text);
+      font-weight: 900;
+    }
+
+    .x-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--green-dark);
+      font-weight: 800;
+      text-decoration: none;
+      padding: 0 3px;
+    }
+
+    .x-link:hover {
+      text-decoration: underline;
+    }
+
+    .thanks-card {
+      animation-delay: 0.2s;
+      text-align: center;
+      padding: 18px;
+    }
+
+    .thanks-text {
       font-size: 12px;
       color: var(--text-soft);
-      line-height: 1.65;
-      padding-left: 14px;
-      position: relative;
+      line-height: 1.8;
     }
 
-    .notice-list li::before {
-      content: "•";
-      position: absolute;
-      left: 2px;
-      color: var(--green);
-      font-weight: 900;
-    }
-
-    /* ── 合言葉カード ── */
-    .keyword-card {
-      animation-delay: 0.2s;
-    }
-
-    .keyword-title {
-      font-size: 13px;
-      font-weight: 900;
-      color: #425c52;
-      text-align: center;
-      margin-bottom: 14px;
-    }
-
-    .keyword-sub {
-      font-size: 11px;
-      color: var(--text-soft);
-      text-align: center;
-      margin-bottom: 14px;
-      line-height: 1.7;
-    }
-
-    .input-wrap {
-      position: relative;
-    }
-
-    .keyword-input {
-      width: 100%;
-      border: 2px solid #e2e8f0;
-      border-radius: 18px;
-      padding: 13px 16px;
-      font-size: 15px;
-      font-family: inherit;
-      color: var(--text);
-      background: #fff;
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      text-align: center;
-      letter-spacing: 0.06em;
-    }
-
-    .keyword-input::placeholder {
-      color: #c0ccda;
-      font-size: 13px;
-      letter-spacing: 0.02em;
-    }
-
-    .keyword-input:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 4px rgba(101, 207, 166, 0.15);
-    }
-
-    .keyword-input.error {
-      border-color: #ef6f6c;
-      box-shadow: 0 0 0 4px rgba(239, 111, 108, 0.12);
-      animation: shake 0.35s ease;
-    }
-
-    @keyframes shake {
-
-      0%,
-      100% {
-        transform: translateX(0);
-      }
-
-      20% {
-        transform: translateX(-6px);
-      }
-
-      40% {
-        transform: translateX(6px);
-      }
-
-      60% {
-        transform: translateX(-4px);
-      }
-
-      80% {
-        transform: translateX(4px);
-      }
-    }
-
-    .enter-btn {
-      margin-top: 12px;
-      width: 100%;
-      appearance: none;
-      border: none;
-      border-radius: 18px;
-      padding: 14px;
-      font-size: 14px;
-      font-weight: 900;
-      font-family: inherit;
-      letter-spacing: 0.05em;
-      background: linear-gradient(135deg, var(--green) 0%, #47c99c 100%);
-      color: #fff;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(101, 207, 166, 0.35);
-      transition: transform 0.13s ease, box-shadow 0.13s ease;
-    }
-
-    .enter-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 26px rgba(101, 207, 166, 0.42);
-    }
-
-    .enter-btn:active {
-      transform: scale(0.98);
-    }
-
-    .error-msg {
-      margin-top: 9px;
-      font-size: 11px;
-      color: #ef6f6c;
-      text-align: center;
-      min-height: 16px;
-      transition: opacity 0.2s ease;
-    }
-
-    /* ── アニメーション ── */
     @keyframes fadeSlideDown {
       from {
         opacity: 0;
@@ -328,22 +227,6 @@
         transform: translateY(0);
       }
     }
-
-    /* ── 遷移フラッシュ ── */
-    .transition-flash {
-      position: fixed;
-      inset: 0;
-      background: #fff;
-      z-index: 9999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .transition-flash.active {
-      opacity: 1;
-      pointer-events: all;
-    }
   </style>
 </head>
 
@@ -353,83 +236,55 @@
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <div class="transition-flash" id="flash"></div>
-
   <div class="wrapper">
 
-    <!-- ロゴ -->
     <div class="logo-wrap">
       <img src="image/logo.webp" alt="ぐろーぐーのおるすばん">
     </div>
 
-    <!-- 注意事項 -->
-    <div class="card notice-card">
-      <div class="notice-title">📖 注意事項</div>
-      <ul class="notice-list">
-        <li>本作品はファンによる非公式ゲームです</li>
-        <li>個人制作のため不具合がある場合があります</li>
-        <li>検索エンジンからの検索避け設定を行っています</li>
-        <li>アクセス状況把握のためGoogle Tag Manager等を利用しています</li>
-        <li>公式および関係者とは一切関係ありません</li>
-        <li>何かあれば<a href="https://wavebox.me/wave/bxhh229ovzswjhhg/" target="_blank"
-            style="text-decoration: none; padding: 0 5px; color: var(--green-dark);">Wavebox <i
-              class="fa-solid fa-up-right-from-square"></i></a>まで
-        </li>
-      </ul>
-    </div>
+    <main class="card notice-card">
+      <div class="notice-title">📖 お知らせ</div>
+      <div class="notice-body">
+        <p><strong>本サイトは公開を終了しました。</strong></p>
 
-    <!-- 合言葉 -->
-    <div class="card keyword-card">
-      <div class="keyword-title">🔑 合言葉を入力してね</div>
-      <div class="keyword-sub">ヒント：戦士たちの誇り高き合言葉・日本語4文字で</div>
-      <div class="input-wrap">
-        <input class="keyword-input" id="keywordInput" type="text" placeholder="合言葉を入力…" autocomplete="off"
-          spellcheck="false">
+        <p>
+          公開後、権利面に関する懸念についてご意見をいただきました。
+        </p>
+
+        <p>
+          本作は個人制作の趣味作品として公開したものですが、想定以上に多くの方に遊んでいただき、広く拡散されたこともあり、リスクを考慮して公開を終了する判断をしました。
+        </p>
+
+        <p>
+          公開期間は約3時間と短いものでしたが、たくさんの方に遊んでいただき、感想や応援のメッセージもいただけたことを大変嬉しく思っています。
+        </p>
+
+        <p>
+          なお、権利元から連絡や削除要請を受けたわけではなく、自主的な判断として非公開化しています。
+        </p>
+
+        <p>
+          公開時のスクリーンショットや使用していた画像については、Xに投稿しています。興味のある方は
+          <a class="x-link" href="https://x.com/fukuba15" target="_blank" rel="noopener noreferrer">X <i
+              class="fa-solid fa-up-right-from-square"></i></a>
+          をご覧ください。
+        </p>
+
+        <p class="thanks-text">
+          短い期間ではありましたが、<br>
+          本当にありがとうございました。
+        </p>
+        <hr>
+        <p>更新履歴<br>
+          2026/06/09　お知らせ追加<br>
+          2026/06/07　23時頃非公開<br>
+          2026/06/07　21時頃公開<br>
+
+        </p>
       </div>
-      <div class="error-msg" id="errorMsg"></div>
-      <button class="enter-btn" id="enterBtn" onclick="checkKeyword()">
-        🐾 ゲームをはじめる
-      </button>
-    </div>
+    </main>
 
   </div>
-
-  <script>
-    const KEYWORD = "我らの道";
-
-    const input = document.getElementById("keywordInput");
-    const errorMsg = document.getElementById("errorMsg");
-    const flash = document.getElementById("flash");
-
-    // Enterキーでも送信
-    input.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") checkKeyword();
-    });
-
-    // エラースタイルをリセット
-    input.addEventListener("input", function () {
-      input.classList.remove("error");
-      errorMsg.textContent = "";
-    });
-
-    function checkKeyword() {
-      const val = input.value.trim();
-      if (val === KEYWORD) {
-        // 正解 → フラッシュして遷移
-        flash.classList.add("active");
-        setTimeout(function () {
-          window.location.href = "game.html";
-        }, 300);
-      } else {
-        // 不正解
-        input.classList.remove("error");
-        void input.offsetWidth; // reflow for re-trigger animation
-        input.classList.add("error");
-        errorMsg.textContent = "合言葉が違うようです…もう一度試してみてね";
-        input.select();
-      }
-    }
-  </script>
 </body>
 
 </html>
